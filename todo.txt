@@ -1,0 +1,4 @@
+=> in .htaccess
+
+    +> remove dir Directory Browsing    
+            server_config     server_dir 

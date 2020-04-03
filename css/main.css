@@ -1,0 +1,215 @@
+/*The main stylings*/
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    outline: none;
+}
+
+body,
+html {
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+/*  Classes and Ids stying*/
+
+.curved_bg,
+.round_bg {
+    display: none;
+}
+
+.round_bg {
+    position: absolute;
+    bottom: -25px;
+    left: -25px;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    height: 100%;
+}
+
+.container .side_bg {
+    background: linear-gradient(rgba(228, 0, 233, 0.8), rgba(37, 9, 234, 0.8));
+    height: 100%;
+    width: 40%;
+    position: relative;
+}
+
+.side_bg img {
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+.registration {
+    position: relative;
+    width: 60%;
+    border: 1px solid green;
+}
+
+.registration header {
+    width: 100%;
+    display: flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    align-items: center;
+    align-content: center;
+    -ms-flex-item-align: center;
+    justify-content: space-between;
+}
+
+header .logo {
+    padding: 30px;
+}
+
+.logo h1 {
+    color: #3c3636;
+    font-size: 1.6em;
+    font-weight: 400;
+}
+
+header nav {
+    display: flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    align-items: center;
+    align-content: center;
+    -ms-flex-item-align: center;
+    justify-content: space-between;
+}
+
+nav .menu_bar {
+    padding: 40px;
+    color: #3c3636;
+    font-size: 20px;
+    text-align: center;
+}
+
+.menu_bar i {
+    cursor: pointer;
+}
+
+nav ul {
+    display: none;
+}
+
+
+/*The signup section styling*/
+
+.sign_up {
+    width: 80%;
+    margin: auto;
+    height: 400px;
+}
+
+.sign_up form {
+    width: 80%;
+    height: 100%;
+    margin: auto;
+}
+
+form h3 {
+    text-align: center;
+    color: #3c3636;
+    font-size: 1.5em;
+    padding: 10px 0;
+}
+
+form>div {
+    margin: auto;
+    padding: 10px;
+    position: relative;
+}
+
+form>div i {
+    padding: 0 10px;
+    background: linear-gradient(rgba(228, 0, 233, 0.8), rgba(37, 9, 234, 0.8));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+form>div .fa-user,
+.fa-lock,
+.fa-phone,
+.fa-envelope {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.eye {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+
+form>div input {
+    width: 100%;
+    padding: 12px 30px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 0px 10px rgba(130, 128, 236, 0.4);
+    font-size: 16px;
+}
+
+form>div input::placeholder {
+    color: #3c3636;
+    padding: 0 20px;
+}
+
+::-webkit-input-placeholder {
+    color: #3c3636;
+    padding: 0 20px;
+}
+
+:-ms-input-placeholder {
+    color: #3c3636;
+    padding: 0 20px;
+}
+
+form .btn_sign_up {
+    display: block;
+    width: 100%;
+    background: linear-gradient(to right, rgba(228, 0, 233, 0.8), rgba(37, 9, 234, 0.5));
+    padding: 12px 30px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    color: #fff;
+    box-shadow: 0 0px 15px rgba(130, 128, 236, 0.7);
+    cursor: pointer;
+}
+
+form .login_redirect {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+
+.login_redirect span {
+    color: #3c3636;
+    font-size: 14px;
+}
+
+.login_redirect a {
+    font-size: 15px;
+    background: linear-gradient(rgba(228, 0, 233, 0.8), rgba(37, 9, 234, 0.8));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
