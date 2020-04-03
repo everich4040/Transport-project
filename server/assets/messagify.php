@@ -31,7 +31,7 @@ class Messagify{
 
     public function set($key,$val)
     {
-        $this->res[$key]=htmlentities($val);
+        $this->res[$key]=($val);
     }
 
     public function flush()

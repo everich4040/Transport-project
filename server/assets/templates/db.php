@@ -44,4 +44,38 @@
             }
         }
 
+        public function query($sql,$arr){
+            $a=0;
+            $res=[];
+            try{
+                
+                $stmt=$this->conn->prepare($sql);
+
+                $stmt->execute($arr);
+                
+                $res=$stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                
+            } catch(PDOException $e){
+                
+                $err = $e->getMessage();        
+                $a=1;
+
+            }
+            if ($a){
+                return 0;
+            } 
+            return $res;
+        
+        }
+
+        public function exec($sql,$arr){
+                  
+            $stmt=$this->conn->prepare($sql);
+
+            $res=$stmt->execute($arr);
+            return $res;
+            
+
+        }
     }

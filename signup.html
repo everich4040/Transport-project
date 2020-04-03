@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="submit">
-                        <button name="sign_up" class="btn_sign_up" onclick="ajax_request('signUpForm',response);">
+                        <button name="sign_up" class="btn_sign_up" onclick="ajax_request('signUpForm',response,1);">
                             CREATE AN ACCOUNT
                         </button>
                     </div>
@@ -94,7 +94,7 @@
 
         function response(res) {
 
-            console.log(res.json);
+            console.log(res);
         
         }
 

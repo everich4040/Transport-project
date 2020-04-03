@@ -1,7 +1,7 @@
 <?php
 
-header ('Access-Control-Allow-Origin: none');
-header('Content-Type: applicaton/json');
+// header ('Access-Control-Allow-Origin: none');
+// header('Content-Type: applicaton/json');
 
 define('ROOT',$_SERVER['DOCUMENT_ROOT'],1);
 
@@ -122,7 +122,7 @@ $res=new Messagify();
                     exit();
                 }
                 
-                if(!($_POST['password'] == $_POST['confirmPassword'])){
+                if(!($_REQUEST['password'] == $_REQUEST['confirmPassword'])){
                     
                     $res->err('Conformation Password doesnt match');
                     $res->flush();  
@@ -146,12 +146,40 @@ $res=new Messagify();
 
                 ##  SOME VALIDATIONS    
                 
+                $sql='SELECT * FROM `users` WHERE `email`=:email OR `phone_number`=:phone';
+                
+                $result=$db->query($sql,array(':email'=>$email,':phone'=>$phone));
                 
                 
-                $psswd=password_hash($_REQUEST['password'] , PASSWORD_DEFAULT);
-            
-            
-            
+                #### FINAL CHECK if user exists in database
+
+                if($result == 0 || count($result) >=1){
+                    
+                    $res->err('Signup Failed');                    
+                    $res->msg('an user with this email (or) phone number already exists!');
+                    $res->flush();
+                    exit();
+                    
+                }
+                
+
+
+                $passwd=password_hash($_REQUEST['password'] , PASSWORD_DEFAULT);
+                
+                
+                $sql='INSERT INTO `users`(`name`,`email`,`password`,`phone_number`) 
+                                    VALUE(:name,:email,:password,:phone);
+                ';
+
+                if(!$db->exec($sql,array(':name'=>$name,':email'=>$email,':password'=>$passwd,':phone'=>$phone))){
+                    $res->err('Signup Failed');                    
+                    $res->msg('something went wrong please try again later!');
+                    $res->flush();
+                    exit();
+                }
+
+
+
             
             
             #################################################
@@ -162,6 +190,7 @@ $res=new Messagify();
             $res->msg('Signup Successfull');
             $res->flush();
             exit();
+
             #SUCCESSFULLY EXIT SIGNUP
         } else {
             
