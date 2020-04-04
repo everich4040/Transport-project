@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+    * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+p {
+    font-size: 16px;
+}
+
+body,html {
+    background: linear-gradient(rgba(222, 4, 236, 0.8), rgba(37, 9, 234, 0.8));
+    background-repeat: no-repeat;
+    height: 100%;
+    position: relative;
+    font-family: sans-serif;
+    color: #1a1a1a;
+}
+
+.container {
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    width: 50%;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    background: #fff;
+}
+
+.container .showcase {
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    width: 90%;
+    margin: 20px auto;
+    -webkit-box-shadow: 2px 2px 5px rgba(51,51,51,.4);
+    -moz-box-shadow: 2px 2px 5px rgba(51,51,51,.4);
+        box-shadow: 2px 2px 5px rgba(51, 51, 51, .4);
+}
+
+.showcase .rectangle {
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(to right, rgba(222, 4, 236, 0.8), rgba(37, 9, 234, 0.8));
+}
+
+.showcase .showcase_text {
+    padding: 0 15px;
+    text-align: center;
+}
+
+.showcase_text h3 {
+    font-size: 18px;
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+    color: #333;
+}
+
+.showcase .welcome span {
+    background: linear-gradient(rgba(228, 0, 233, 0.8), rgba(37, 9, 234, 0.8));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.showcase_text p {
+    text-align: center;
+    padding: 7px;
+    font-size: 14px;
+}
+
+.confirm_btn {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.confirm_btn a {
+    font-size: 16px;
+    color: #fff;
+    background: linear-gradient(to right, hsla(299, 100%, 46%, 0.8), rgba(37, 9, 234, 0.5));
+    padding: 10px 30px;
+    text-decoration: none;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    -webkit-box-shadow: 0 0 6px #ccc;
+    -moz-box-shadow: 0 0 6px #ccc;
+    box-shadow: 0 0 6px #ccc;
+}
+
+.showcase .mistake {
+    text-align: center;
+    padding: 0 0 10px 0;
+}
+
+.mistake p {
+    font-size: 14px;
+    padding: 0 15px;
+    color: #808080;
+}
+
+footer {
+    padding: 8px 4px;
+    text-align: center;
+}
+
+footer .social {
+    display: inline-block;
+    padding: 10px 0;
+}
+
+.social i {
+    width: 35px;
+    height: 35px;
+    margin: 0 10px;
+    border-radius: 50%;
+    line-height: 38px;
+    text-align: center;
+    font-size: 17px;
+}
+
+.fa-facebook-f {
+    background: #1877f2;
+    color: #fff;
+}
+
+.fa-twitter {
+    background: #1da1f2;
+    color: #fff;
+}
+
+footer .copyright {
+    padding: 10px 0;
+}
+
+.copyright p {
+    font-size: 16px;
+}
+
+footer .unsubscribe {
+    padding: 10px 0;
+}
+
+.unsubscribe p {
+    font-size: 16px;
+}
+
+.unsubscribe p a {
+    background: linear-gradient(rgba(228, 0, 233, 0.8), rgba(37, 9, 234, 0.8));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 14px;
+}
+
+footer .website p {
+    color: #1a1a1a;
+    padding: 10px 0;
+}
+
+
+/* Media Queries*/
+
+@media screen and (max-width:790px) {
+    .container {
+        width: 60%;
+    }
+    p {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width:640px) {
+    .container {
+        width: 80%;
+    }
+    p {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width:460px) {
+    .container {
+        width: 90%;
+    }
+    p {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width:360px) {
+    .container {
+        width: 95%;
+    }
+    p {
+        font-size: 10px;
+    }
+}    
+    </style>
+    <title>Confirm Email</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="showcase">
+            <div class="rectangle"></div>
+            <div class="showcase_text">
+                <h3>Verify your email address</h3>
+                <p class="welcome">welcome to <span>website.com</span></p>
+                <p>please click on the button below to confirm and activate your account</p>
+            </div>
+            <div class="confirm_btn">
+                <a href="">CONFIRM EMAIL</a>
+            </div>
+            <div class="mistake">
+                <p>If you recieved this as error, simply ignore the email and do not click on it</p>
+            </div>
+        </div>
+        <footer>
+            <div class="social">
+                <a href=""><i class="fa fa-facebook-f"></i></a>
+                <a href=""><i class="fa fa-twitter"></i></a>
+            </div>
+            <div class="copyright">
+                <p>copyright &copy; <span class="date"></span> website.com INC</p>
+            </div>
+            <div class="unsubscribe">
+                <p>if you don't want to recieve this emails <a href="">UNSUBSCIRBE</a></p>
+            </div>
+            <div class="website">
+                <p>website.com</p>
+            </div>
+        </footer>
+    </div>
+    <script>
+        const date = document.querySelector(".date").innerHTML = new Date().getFullYear() + ",";
+    </script>
+</body>
+
+</html>
