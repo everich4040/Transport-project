@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transport project</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/media_queries.css" />
+    <link rel="stylesheet" href="./fontawesome/css/all.min.css">
+    <!-- <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!--The container carrying the entire page-->
+    <div class="round_bg"><img src="img/round.png" alt="" /></div>
+    <div class="curved_bg"><img src="img/curve.png" alt="" /></div>
+    <div class="container">
+        <div class="side_bg">
+            <div class="inner_img">
+                <img src="img/nice-guy.png" alt="" />
+            </div>
+        </div>
+        <div class="registration">
+            <!--Header of the page ie the logo, burger icon and the navigation links-->
+            <header>
+                <div class="logo">
+                    <h1>LOGO</h1>
+                </div>
+
+                <!---THis is the starting of the navigation menu ie the links and burger icons-->
+                <nav>
+                    <div class="menu_bar">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </div>
+                    <ul>
+                        <li><a href="">Home</a></li>
+                        <li><a href="">About</a></li>
+                        <li><a href="">Contact</a></li>
+                        <li><a href="">Portfolio</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <!---The registration form-->
+            <section class="sign_up">
+                <form action="./server/formHandler.php" method="post" id="logInForm">
+                    <h3>Log In</h3>
+
+                    <div class="email">
+                        <i class="fa fa-envelope"></i>
+                        <input name="email" type="email" placeholder="Email / Phone" required />
+                    </div>
+                    <div class="password">
+                        <i class="fa fa-lock"></i>
+                        <input name="password" type="password" placeholder="Password" required />
+                        <i class="fa fa-eye eye"></i>
+                    </div>
+
+
+                    <div class="submit">
+                        <button name="login" class="btn_sign_up login_sign_in" onclick="ajax_request('logInForm',response);">
+                            Login In
+                        </button>
+                    </div>
+                    <div class="login_redirect signup_redirect">
+                        <span>Forgot Password</span><a href="./reset_password.html"> Reset</a>
+                    </div>
+                    <div class="login_redirect signup_redirect">
+                        <span>Don't Have An Account </span><a href="./signup.html">Create An Account</a>
+                    </div>
+                    <input type="hidden" name="action" value="logIn">
+                </form>
+            </section>
+        </div>
+    </div>
+    <script src="js/style.js"></script>
+
+    <script src="js/ajax/main.js"></script>
+
+    <script>
+        ///////// params => id of form element , response callback
+
+        
+
+        function response(res) {
+
+            console.log(res.response);
+        
+        }
+
+    </script>
+
+</body>
+
+</html>
