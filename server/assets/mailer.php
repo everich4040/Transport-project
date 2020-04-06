@@ -6,8 +6,8 @@
 
         $subject = 'VERIFY YOUR EMAIL'; 
         $headers = "From:  ".$from." \r\n";
-        $headers .= "Reply-To:  giri00421@outlook.com  \r\n";
-        $headers .= "CC: giri00421@outlook.com \r\n";
+        // $headers .= "Reply-To:  giri00421@outlook.com  \r\n";
+        // $headers .= "CC: giri00421@outlook.com \r\n";
         
         $headers .= "MIME-Version: 1.0\r\n";
         $headers .= "Content-Type: text/html;charset=UTF-8 \r\n"; 
@@ -25,8 +25,8 @@
         $errr=0;
         try{
 
-            if( mail($to, $subject, $message, $headers)){
-                return 1;
+            if(!mail($to, $subject, $message, $headers)){
+                return 0;
             }
 
         } catch(Exception $e){

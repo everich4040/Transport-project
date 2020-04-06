@@ -1,6 +1,6 @@
 <?php
+    error_reporting(0);
 
-    
     include_once $_SERVER['DOCUMENT_ROOT'].'/server/assets/formValidator.php';
     
     

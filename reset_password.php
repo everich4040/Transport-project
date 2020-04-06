@@ -1,3 +1,32 @@
+<?php
+    error_reporting(0);
+    if(!isset($_REQUEST['uId']) || !isset($_REQUEST['key']) || empty($_REQUEST['uId']) || empty($_REQUEST['key'])){
+        
+        #############
+        ## PRINT FAILED HTML VALIDATION
+
+        echo 'validation failed! <h1 style="color:orangered"> please generate another code for reset </h1>';
+        die();
+        
+    }
+    include_once $_SERVER['DOCUMENT_ROOT'].'/server/assets/templates/dbConnect.php';
+    
+    $sql='SELECT * FROM `reset` WHERE `user_id` = :ID AND `hash`=:hash';
+    $result=$db->query($sql,array(':ID'=>$_REQUEST['uId'],':hash'=>$_REQUEST['key']));
+    
+    if(!$result){
+        
+        #############
+        ## PRINT FAILED HTML VALIDATION
+
+        echo 'validation failed! <h1 style="color:orangered"> please generate another code for reset </h1>';
+        die();
+    
+    }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,50 +73,49 @@
             </header>
             <!---The registration form-->
             <section class="sign_up">
-                <form action="./server/formHandler.php" method="post" id="logInForm">
-                    <h3>Log In</h3>
+                <form action="./server/formHandler.php" method="POST" id="resetForm">
+                    <h3>Reset Password</h3>
 
-                    <div class="email">
-                        <i class="fa fa-envelope"></i>
-                        <input name="email" type="email" placeholder="Email / Phone" required />
-                    </div>
+                    
                     <div class="password">
                         <i class="fa fa-lock"></i>
-                        <input name="password" type="password" placeholder="Password" required />
+                        <input name='password' type="password" placeholder="new Password" required />
                         <i class="fa fa-eye eye"></i>
                     </div>
 
 
                     <div class="submit">
-                        <button name="login" class="btn_sign_up login_sign_in" onclick="ajax_request('logInForm',response);">
-                            Login In
+                        <button name="reset_psw" class="btn_sign_up reset login_sign_in" onclick="ajax_request('resetForm',response);">
+                            Reset Password
                         </button>
                     </div>
                     
-                    <div class="login_redirect signup_redirect">
-                        <span>Forgot Password</span><a href="./reset_form.html"> Reset </a>
-                    </div>
-                    <div class="login_redirect signup_redirect">
-                        <span>Don't Have An Account </span><a href="./signup.html">Create An Account</a>
-                    </div>
-                    <input type="hidden" name="action" value="logIn">
+                    
+                    <input type="hidden" name="action" value="reset">
+
+                    <?php
+                    
+                        echo '<input type="hidden" name="uId" value="'.$_REQUEST['uId'].'">';
+                        echo '<input type="hidden" name="key" value="'.$_REQUEST['key'].'">';
+
+                    ?>
+
+
                 </form>
             </section>
         </div>
     </div>
     <script src="js/style.js"></script>
-
     <script src="js/ajax/main.js"></script>
 
     <script>
-        ///////// params => id of form element , response callback
 
-        
+
 
         function response(res) {
 
             console.log(res.response);
-        
+
         }
 
     </script>

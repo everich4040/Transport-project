@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="./fontawesome/css/all.min.css">
     <!-- <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    
+    <script src="js/ajax/main.js"></script>
+
 </head>
 
 <body>
@@ -44,28 +47,40 @@
             </header>
             <!---The registration form-->
             <section class="sign_up">
-                <form action="" method="">
+                <form action="./server/resetHandler.php" method="POST" id='resetForm'>
                     <h3>Reset Password</h3>
 
-
-                    <div class="password">
-                        <i class="fa fa-lock"></i>
-                        <input type="password" placeholder="new Password" required />
-                        <i class="fa fa-eye eye"></i>
+                   
+                    <div class="email">
+                        <i class="fa fa-envelope"></i>
+                        <input name="email" placeholder="Email / Phone" required />
                     </div>
+                   
 
 
                     <div class="submit">
-                        <button name="reset_psw" class="btn_sign_up reset login_sign_in">
+                        <button name="reset_psw" class="btn_sign_up reset login_sign_in" onclick="ajax_request('resetForm',response);">
                             Reset Password
                         </button>
                     </div>
-
+                    <input type="hidden" name="action" value="reset_form">
                 </form>
             </section>
         </div>
     </div>
     <script src="js/style.js"></script>
+    <script>
+
+
+
+        function response(res) {
+
+            console.log(res.response);
+
+        }
+
+    </script>
+
 </body>
 
 </html>

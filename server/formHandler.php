@@ -1,9 +1,11 @@
 <?php
 
+
 session_start();
+header('Content-Type: applicaton/json');
+error_reporting(0);
 
 // header ('Access-Control-Allow-Origin: none');
-// header('Content-Type: applicaton/json');
 
 define('ROOT',$_SERVER['DOCUMENT_ROOT'],1);
 
@@ -31,7 +33,14 @@ $res=new Messagify();
             handleLogin();
             exit();
         
+        } else if (preg_match('#reset#i',$_REQUEST['action'])){
+            
+
+            handleReset();
+            exit();
+        
         }
+
 
 
 
@@ -225,6 +234,8 @@ $res=new Messagify();
     function handleLogin()
     {
 
+        
+        
         global $res;
         include_once ROOT.'/server/assets/formValidator.php';
 
@@ -345,7 +356,96 @@ $res=new Messagify();
 
 
 
+######################### HANDLE RESET ############################
 
+
+    function handleReset(){
+        
+        global $res;
+
+        include_once ROOT.'/server/assets/formValidator.php';
+        if( !validateRequest(array('password')) ){
+            $res->err('failed');
+            $res->msg('something is wrong with form');
+            $res->flush();
+        }
+        
+        if( !validateRequest(array('uId','key')) ){
+            $res->err('failed');
+            $res->msg('validation failed please check email and try again');
+            $res->flush();
+        }
+        
+        
+        include_once ROOT.'/server/assets/templates/dbConnect.php';
+
+        $sql='SELECT * FROM `reset` WHERE `user_id` = :ID AND `hash`=:hash';
+        $result=$db->query($sql,array(':ID'=>$_REQUEST['uId'],':hash'=>$_REQUEST['key']));
+
+        
+
+        if(!$result || !isset($result[0]) || !isset($result[0]['user_id']) || !isset($result[0]['hash'])){
+    
+            #############
+            ## PRINT FAILED HTML VALIDATION
+            
+            $res->err('failed');
+            $res->msg('validation failed please check email and try again');
+            $res->flush();
+
+            die();
+        }
+        
+        if($result[0]['hash'] != $_REQUEST['key'] || $result[0]['user_id'] != $_REQUEST['uId'] ){
+
+            
+            $res->err('failed');
+            $res->msg('validation failed please check email and try again');
+            $res->flush();
+
+            die();            
+        }
+        
+        ##EVERY THING IS FINE
+        $db->conn->beginTransaction();
+        
+        
+        $sql='DELETE FROM `reset` WHERE `user_id`=:uId';
+        if(!$db->exec($sql,array(':uId'=>$_REQUEST['uId']))){
+            $db->conn->rollback();
+            
+            $res->err('failed');
+            $res->msg('validation failed please check email and try again');
+            $res->flush();
+    
+            die();            
+        }
+        
+        $pwdHash=password_hash($_REQUEST['password'],PASSWORD_DEFAULT);
+        
+        $sql='UPDATE `users` SET `password`=:newPwd WHERE `user_id`=:uId';
+        
+        if(!$db->exec($sql,array(':newPwd'=>$pwdHash,':uId'=>$_REQUEST['uId']))){
+            
+            $db->conn->rollback();
+            
+            $res->err('failed');
+            $res->msg('validation failed please check email and try again');
+            $res->flush();
+    
+            die();            
+        }
+
+
+        $db->conn->commit();
+
+        $res->msg('successfully changed new password');
+        $res->redirect($_SERVER['HTTP_HOST']);
+        $res->flush();
+    }
+
+
+###################################################################
 
 
 

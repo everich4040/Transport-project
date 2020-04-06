@@ -88,3 +88,26 @@
 
 
 ###################################################
+
+
+
+
+########################    resets Table
+
+    $sql='CREATE TABLE IF NOT EXISTS `reset`(
+        `user_id` INT(10)  UNSIGNED NOT NULL PRIMARY KEY ,
+        `hash` VARCHAR(40) /*sha1 hash*/,
+        `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );';    
+
+
+    if($db->execute($sql)){
+        echo 'table `reset` created! <br>';
+
+    } else {
+        
+        echo 'Failed Creating Table `reset` <br><br>';
+        echo $db->err.'<br><br><br>';
+    } 
+
+###########################################################
