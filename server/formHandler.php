@@ -453,7 +453,8 @@ $res=new Messagify();
 ##################  mail function   ##########
     
     function mailUserHash($email,$hash,$id){
-        
+        // for testing 
+        //return 1;    
         
         ##  email just for fun
         $uri;
@@ -513,11 +514,9 @@ $res=new Messagify();
 
         ## setup database
 
-        $aa=-1;
-
+        
         $ipAddr=$_SERVER['REMOTE_ADDR'];
         
-        sessS:
         
         
         $sql='SELECT * FROM `sessions` WHERE `ip`=:ip AND `user_id`=:uId';
@@ -543,7 +542,7 @@ $res=new Messagify();
         } 
 
         
-        $sql ='INSERT INTO `sessions`(`user_id`,`ip`,`hash`) VALUE(:uId,:ip,:hash);';
+        $sql ='INSERT INTO `sessions`(`user_id`,`ip`,`hash`) VALUE(:uId,:ip,:hash)';
 
         $hash= sha1(Util::randStr());
 
@@ -552,15 +551,32 @@ $res=new Messagify();
         if(!$result){
         
             return 0;
+
         }
 
-        $aa++;
+
+        $sql='SELECT * FROM `sessions` WHERE `ip`=:ip AND `user_id`=:uId';
+
+        $result=$db->query($sql,array(':ip'=>$ipAddr,':uId'=>$arr['user_id']));
+
+        if(isset($result[0]) && isset($result[0]['id'])){
+                
+            $_SESSION['id']=$result[0]['id'];            
+            setcookie('id',$result[0]['id'],time() +  COOKIE_MAX_LIFE, '/');
+            
+            $_SESSION['key']=$result[0]['hash'];            
+            setcookie('key',$result[0]['hash'],time() +  COOKIE_MAX_LIFE, '/');
+            ###update date
+            $sql='UPDATE `sessions` SET `date` = CURRENT_TIMESTAMP  WHERE id=:tId';
+            if(!$db->exec($sql,array(':tId'=>$result[0]['id']))){
         
-        if($aa!=0){
-            return 0;
-        } else {
-            goto sessS;
-        }
+                return 0;
+            }
+
+            return 1;
+        
+        } 
+
         
         return 0;
     }

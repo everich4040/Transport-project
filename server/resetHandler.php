@@ -111,6 +111,9 @@
     $message = $html; 
     // echo $message;
     $errr=0;
+
+    
+    
     try{
 
         if(!mail($to, $subject, $message, $headers)){
