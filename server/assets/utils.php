@@ -23,5 +23,44 @@
             return $gen; 
         }
 
+        public static function checkSessions($arr)
+        {   
+            $a=1;
+            foreach ($arr as $key) {
+               
+               if(!isset($_SESSION[$key]) && empty($_SESSION[$key])){
+                    $a = 0;
+               }
+                
+            }
 
+
+            return $a;
+        }
+
+        public static function checkCookies($arr)
+        {   
+            $a=1;
+            foreach ($arr as $key) {
+               
+               if(!isset($_COOKIE[$key]) && empty($_COOKIE[$key])){
+                    $a = 0;
+               }
+                
+            }
+
+
+            return $a;
+        }
+
+        public static function checkLogin()
+        {
+            if(isset($_COOKIE['key']) || isset($_SESSION['key'])){
+                return 1;
+            }
+
+            return 0;
+        }
+
+        
     }

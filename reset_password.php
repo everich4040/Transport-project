@@ -1,3 +1,32 @@
+<?php
+    error_reporting(0);
+    if(!isset($_REQUEST['uId']) || !isset($_REQUEST['key']) || empty($_REQUEST['uId']) || empty($_REQUEST['key'])){
+        
+        #############
+        ## PRINT FAILED HTML VALIDATION
+
+        echo 'validation failed! <h1 style="color:orangered"> please generate another code for reset </h1>';
+        die();
+        
+    }
+    include_once $_SERVER['DOCUMENT_ROOT'].'/server/assets/templates/dbConnect.php';
+    
+    $sql='SELECT * FROM `reset` WHERE `user_id` = :ID AND `hash`=:hash';
+    $result=$db->query($sql,array(':ID'=>$_REQUEST['uId'],':hash'=>$_REQUEST['key']));
+    
+    if(!$result){
+        
+        #############
+        ## PRINT FAILED HTML VALIDATION
+
+        echo 'validation failed! <h1 style="color:orangered"> please generate another code for reset </h1>';
+        die();
+    
+    }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,63 +73,52 @@
             </header>
             <!---The registration form-->
             <section class="sign_up">
-                <form id="signUpForm" action="./server/formHandler.php" method="post">
-                    <h3>Sign Up</h3>
-                    <div class="fullname">
-                        <i class="fa fa-user"></i>
-                        <input type="text" name="fullName" placeholder="Fullname" required />
-                    </div>
-                    <div class="email">
-                        <i class="fa fa-envelope"></i>
-                        <input type="email" name="email" placeholder="Email" required />
-                    </div>
+                <form action="./server/formHandler.php" method="POST" id="resetForm">
+                    <h3>Reset Password</h3>
+
+                    
                     <div class="password">
                         <i class="fa fa-lock"></i>
-                        <input type="password" name="password" placeholder="Password" required />
+                        <input name='password' type="password" placeholder="new Password" required />
                         <i class="fa fa-eye eye"></i>
                     </div>
-                    <div class="confirm_password">
-                        <i class="fa fa-lock"></i>
-                        <input type="password" name="confirmPassword"  placeholder="Confirm password" required />
-                        <i class="fa fa-eye eye"></i>
-                    </div>
-                    <div class="phone">
-                        <i class="fa fa-phone"></i>
-                        <input  name="phone" placeholder="phone" required />
-                    </div>
+
 
                     <div class="submit">
-                        <button name="sign_up" class="btn_sign_up" onclick="ajax_request('signUpForm',response);">
-                            CREATE AN ACCOUNT
+                        <button name="reset_psw" class="btn_sign_up reset login_sign_in" onclick="ajax_request('resetForm',response);">
+                            Reset Password
                         </button>
                     </div>
-                    <div class="login_redirect">
-                        <span>Already a member? </span><a href="./login.html">Sign in</a>
-                    </div>
+                    
+                    
+                    <input type="hidden" name="action" value="reset">
+
+                    <?php
+                    
+                        echo '<input type="hidden" name="uId" value="'.$_REQUEST['uId'].'">';
+                        echo '<input type="hidden" name="key" value="'.$_REQUEST['key'].'">';
+
+                    ?>
 
 
-                    <input type="hidden" name="action" value="signup">
                 </form>
             </section>
         </div>
     </div>
-    
     <script src="js/style.js"></script>
     <script src="js/ajax/main.js"></script>
 
     <script>
-        ///////// params => id of form element , response callback
 
-        
+
 
         function response(res) {
 
             console.log(res.response);
-        
+
         }
 
     </script>
-
 
 </body>
 

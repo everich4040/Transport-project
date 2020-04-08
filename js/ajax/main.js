@@ -2,10 +2,11 @@
  * 
  * @formId {STRING : ID of the form element} formId  
  * @res {CallableFunction : callback for response json} res
+ * @fullDetail {int : show all details of response?}
  * 
  */
 
-function ajax_request(formId ,res){
+function ajax_request(formId ,res,fullDetail=0){
     const req=new XMLHttpRequest();
     const form=document.getElementById(formId);
     const formData=new FormData();
@@ -33,22 +34,33 @@ function ajax_request(formId ,res){
 
     req.onreadystatechange=function (e) {
         e=e.srcElement;
+
+
         if(e.readyState == 4 && e.status == 200 ){
-            var _json_return={};
-            _json_return["responseURL"]=e["responseURL"];
-            _json_return["response"]=e["response"];
-            try{
-
-                _json_return['json']=JSON.parse(e.responseText);
             
-            } catch {
-
-                _json_return['json']={};
             
+            if(fullDetail){
+                res(e);
+            } else {
+
+                var _json_return={};
+    
+                _json_return["responseURL"]=e["responseURL"];
+                _json_return["response"]=e["response"];
+                try{
+    
+                    _json_return['json']=JSON.parse(e.responseText);
+                
+                } catch {
+    
+                    _json_return['json']={};
+                
+                }
+    
+    
+                res(_json_return);
             }
 
-
-            res(_json_return);
         }
         
     }

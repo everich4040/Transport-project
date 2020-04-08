@@ -44,4 +44,51 @@
             }
         }
 
+        public function query($sql,$arr){
+            $a=0;
+            $res=[];
+            
+            try{
+                
+                $stmt=$this->conn->prepare($sql);
+
+                $stmt->execute($arr);
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $res=$stmt->fetchAll();
+
+                
+            } catch(PDOException $e){
+                
+                $err = $e->getMessage();        
+                $a=1;
+
+            }
+
+            if ($a==1){
+                return 0;
+            } 
+            
+            return $res;
+        
+        }
+
+        public function exec($sql,$arr){
+            $err=0;
+            $res=1;
+            try{
+
+                $stmt=$this->conn->prepare($sql);
+                $stmt->execute($arr);
+                
+            } catch(PDOException $e){
+                $err=1;
+                $this->err=$e->getMessage();
+            }
+            if($err){
+                return false;
+            }
+
+            return $res;
+        
+        }
     }

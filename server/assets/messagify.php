@@ -29,9 +29,13 @@ class Messagify{
         return json_encode($this->res);
     }
 
+    public function redirect($url){
+        $this->res['redirect'] = $url;
+    }
+
     public function set($key,$val)
     {
-        $this->res[$key]=htmlentities($val);
+        $this->res[$key]=($val);
     }
 
     public function flush()
